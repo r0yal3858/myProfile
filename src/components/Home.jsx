@@ -1,11 +1,11 @@
+import Contact from "./Contact";
+import Intro from "./Intro";
 import "./Home.css";
-import { useState } from "react";
-import doc from "./Bhanu_Koppolu.pdf";
+import { useState, memo } from "react";
 
-const Home = () => {
+const Home = ({ setTime }) => {
   const [academic, setAcademic] = useState(0);
   const [personal, setPersonal] = useState(0);
-  const [email, setEmail] = useState("Email");
 
   const academicProjects = [
     {
@@ -50,128 +50,112 @@ const Home = () => {
 
   return (
     <div className="main">
-      <div className="name">
-        <h1>Bhanu Srinivasa Sai Royal Koppolu</h1>
-      </div>
-
       <div className="content">
-        <div className="links">
-          <a
-            href="https://www.linkedin.com/in/bhanu-srinivasa-koppolu-5b5856184"
-            target="_blank"
-          >
-            LinkedIn
-          </a>
-          <a href="https://github.com/r0yal3858" target="_blank">
-            Github
-          </a>
-          <a href="https://codepen.io/r0yal3858/pens/" target="_blank">
-            CodePen
-          </a>
-          <a
-            onClick={async (e) => {
-              e.preventDefault();
-              try {
-                await navigator.clipboard.writeText(
-                  "bhanuroyal.koppolu@gmail.com"
-                );
-                window.alert("Email has been copied to clipboard");
-              } catch (e) {
-                window.alert("Error while copying email");
-                setEmail("bhanuroyal.koppolu@gmail.com");
-              }
-            }}
-          >
-            {email}
-          </a>
+        <Intro />
 
-          <a href={doc} target="_blank">
-            Resume
-          </a>
-        </div>
         <div className="wrapper">
-          <div className="project_container">
-            <h1>ACADEMIC PROJECTS</h1>
-            <div className="project">
-              <button
-                onClick={() => {
-                  setAcademic(
-                    (academic) =>
-                      Math.abs(academic - 1) % academicProjects.length
-                  );
-                }}
-                className="controls"
-              >{`<`}</button>
-
-              <div className="projectDisplay">
-                <h2>
-                  {academicProjects[academic].link.length > 0 ? (
-                    <a
-                      href={`${academicProjects[academic].link}`}
-                      target="_blank"
-                    >
-                      {academicProjects[academic].title}
-                    </a>
-                  ) : (
-                    academicProjects[academic].title
-                  )}
-                </h2>
-                <p>{academicProjects[academic].description}</p>
+          <div className="project__wrapper">
+            <div className="project__container">
+              <h1>ACADEMIC PROJECTS</h1>
+              <div className="project">
+                <button
+                  onClick={() => {
+                    setAcademic(
+                      (academic) =>
+                        Math.abs(academic - 1) % academicProjects.length
+                    );
+                  }}
+                  className="controls"
+                >
+                  <i className="fa-solid fa-chevron-left"></i>
+                </button>
+                <div className="projectDisplay">
+                  <h2>
+                    {academicProjects[academic].link.length > 0 ? (
+                      <a
+                        href={`${academicProjects[academic].link}`}
+                        target="_blank"
+                      >
+                        {`${academicProjects[academic].title} `}
+                        <i className="fa-brands fa-github"></i>
+                      </a>
+                    ) : (
+                      academicProjects[academic].title
+                    )}
+                  </h2>
+                  <p>{academicProjects[academic].description}</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setAcademic(
+                      (academic) => (academic + 1) % academicProjects.length
+                    );
+                  }}
+                  className="controls"
+                >
+                  <i className="fa-solid fa-chevron-right"></i>
+                </button>
               </div>
+            </div>
 
-              <button
-                onClick={() => {
-                  setAcademic(
-                    (academic) => (academic + 1) % academicProjects.length
-                  );
-                }}
-                className="controls"
-              >{`>`}</button>
+            <div className="project__container">
+              <h1>PERSONAL PROJECTS</h1>
+              <div className="project">
+                <button
+                  onClick={() => {
+                    setPersonal(
+                      (personal) =>
+                        Math.abs(personal - 1) % personalProjects.length
+                    );
+                  }}
+                  className="controls"
+                >
+                  <i className="fa-solid fa-chevron-left"></i>
+                </button>
+                <div className="projectDisplay">
+                  <h2>
+                    {academicProjects[personal].link.length > 0 ? (
+                      <a
+                        href={`${academicProjects[academic].link}`}
+                        target="_blank"
+                      >
+                        {`${personalProjects[personal].title} `}
+                        <i className="fa-brands fa-github"></i>
+                      </a>
+                    ) : (
+                      personalProjects[personal].title
+                    )}
+                  </h2>
+                  <p>{personalProjects[personal].description}</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setPersonal(
+                      (personal) => (personal + 1) % personalProjects.length
+                    );
+                  }}
+                  className="controls"
+                >
+                  <i className="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="project_container">
-            <h1>PERSONAL PROJECTS</h1>
-            <div className="project">
-              <button
-                onClick={() => {
-                  setPersonal(
-                    (personal) =>
-                      Math.abs(personal - 1) % personalProjects.length
-                  );
-                }}
-                className="controls"
-              >{`<`}</button>
-
-              <div className="projectDisplay">
-                <h2>
-                  {academicProjects[academic].link.length > 0 ? (
-                    <a
-                      href={`${academicProjects[academic].link}`}
-                      target="_blank"
-                    >
-                      {personalProjects[personal].title}
-                    </a>
-                  ) : (
-                    personalProjects[personal].title
-                  )}
-                </h2>
-                <p>{personalProjects[personal].description}</p>
-              </div>
-
-              <button
-                onClick={() => {
-                  setPersonal(
-                    (personal) => (personal + 1) % personalProjects.length
-                  );
-                }}
-                className="controls"
-              >{`>`}</button>
-            </div>
+          <div className="project__current">
+            <h2>What's going on now??</h2>
+            <p>
+              Currently, working on a developing a React plugin for tensorboard
+              server, built on python werkzeug, which caters image editing and
+              analyzing tools for ML models. The plugin in also includes
+              extraction weights of the CNN model, visualizing feature maps,
+              visualizing filters etc.
+            </p>
           </div>
         </div>
+        <Contact />
       </div>
     </div>
   );
 };
 
-export default Home;
+export default memo(Home);
