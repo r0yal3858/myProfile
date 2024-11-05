@@ -1,10 +1,15 @@
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ setTime, time }) => {
+  const navigate = useNavigate();
+  const goto = () => {
+    navigate("/myprofile/edit");
+  };
   return (
     <div className="navwrapper" id="top">
       <div className="typewriter name">
-        <h1>Bhanu Srinivasa Sai Royal Koppolu</h1>
+        <h1 onClick={goto}>Bhanu Srinivasa Sai Royal Koppolu</h1>
       </div>
       <div className="page__links">
         <a href="#1">Experience</a>
