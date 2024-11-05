@@ -14,6 +14,7 @@ const Navbar = ({ setTime, time }) => {
       <div className="page__links">
         <a href="#1">Experience</a>
         <a href="#contact">Contact me</a>
+        <a href="/myprofile/temp.html">temp</a>
         <a
           href="#"
           onClick={() => {
